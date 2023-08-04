@@ -1,18 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!--Aqui podemos colocar nossos styles, porém, podemos separá-los em um arquivo separado também através dos arquivos estáticos.-->
-    <style>
-        h1{
-            color: red;
-        }
-    </style>
+    <!--Aqui podemos colocar nossos styles, porém, podemos separá-los em um arquivo separado também através dos arquivos estáticos. Para isso vá para o arquivo settings-->
+    <link rel="stylesheet" href="{% static 'produtos/css/ver_produto.css' %}">
 </head>
 <body>
     <h1>Olá {{nome}}, tudo bem?</h1>
-    
+    <img src="{% static 'produtos/img/Montanha_Russa.jpeg' %}"> 
+
+    <form action ="{% url 'ver_produto'%}" method="POST">{% csrf_token %}  <!--Para validar o formulário, usamos o csrf_token, criando assim uma forma de identificar se os formulários estão válidos-->
+        <input type="text" name="nome" placeholder='Digite seu nome' id="">
+        <br>
+        <br>
+        <input type="text" name="idade" placeholder="Digite sua idade" id="">
+        <br>
+        <br>
+        <input type="submit" value ="Enviar">
+    </form>
 </body>
 </html>
