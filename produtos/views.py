@@ -8,14 +8,20 @@ def ver_produto(request):
         nome = 'Gabriel'
         return render(request, 'ver_produto.html', {'nome': nome})  # Request, <nome_do_html>, context = {dados}
     elif request.method == "POST":
-        nome = request.POST.get('nome')
-        idade = request.POST.get('idade')
+        try:
+            nome = request.POST.get('nome')
+            idade = request.POST.get('idade')
 
         # Para salvar esse dados em um banco, vamos nos settings para fazer as configurações. Depois, criamos nossos modelos no arquivo models, em seguida cadastramos os modelos na área administrativa.
         # Em seguida, fazemos o seguinte:
-        pessoa = Pessoa(nome=nome, idade = idade)
-        pessoa.save()
-        return HttpResponse('Dados cadastrados com sucesso!') 
+            pessoa = Pessoa(nome=nome, idade=idade)
+            pessoa.save()
+            return HttpResponse('Dados cadastrados com sucesso!')
+        except:
+            # pessoas = Pessoa.objects.all()  # Pega todas as informações do banco de dados.
+            pessoas = Pessoa.objects.filter(nome=nome)  # Filtra os dados a partir de um atributo.
+            print('Usuário já cadastrado!')
+            return HttpResponse(pessoas) 
       
 
 def inserir_produto(request):

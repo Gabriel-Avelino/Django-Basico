@@ -3,7 +3,7 @@ from django.db import models
 
 # Aqui criamos classes que representarão nossas tabelas no banco de dados. 
 class Pessoa(models.Model):
-    nome = models.CharField(max_length=50)
+    nome = models.CharField(max_length=50, unique=True)
     idade = models.IntegerField()
 
     def __str__(self) -> str:
